@@ -1,4 +1,4 @@
-import { Contact, LinkPrecedence, PrismaClient } from '../generated/prisma'; // Import EVERYTHING from your custom generated path
+import { Contact, LinkPrecedence, PrismaClient } from '../generated/prisma'; 
 
 const prisma = new PrismaClient();
 

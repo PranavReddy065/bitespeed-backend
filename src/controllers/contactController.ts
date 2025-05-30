@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
-// This import is correct. It points to your service file where PrismaClient is instantiated.
-import { identifyContactService } from '../services/contact.services'; // Note: .services (plural)
+import { identifyContactService } from '../services/contact.services'; 
 
-// Change from 'export const' to 'const' and then 'export default'
+
 const identifyContactController = async (req: Request, res: Response) => {
     const { email, phoneNumber } = req.body;
 
@@ -19,4 +18,4 @@ const identifyContactController = async (req: Request, res: Response) => {
     }
 };
 
-export default identifyContactController; // Export as default
+export default identifyContactController; 
