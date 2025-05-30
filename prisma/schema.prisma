@@ -1,11 +1,8 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// prisma/schema.prisma
 
 generator client {
   provider = "prisma-client-js"
+  // Keep the custom output path, as your project is configured for it.
   output   = "../src/generated/prisma"
 }
 
@@ -14,12 +11,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Define the LinkPrecedence enum as per the problem description's requirements.
+enum LinkPrecedence {
+  primary
+  secondary
+}
+
 model Contact {
-  id             String   @id @default(uuid())
-  phone          String?  @unique
-  email          String?  @unique
-  linkedId       String?
-  linkPrecedence String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  // id should be Int and auto-incrementing as per problem examples.
+  id            Int      @id @default(autoincrement())
+  // phoneNumber and email should NOT be unique, as multiple contacts can share them.
+  phoneNumber   String?
+  email         String?
+  linkedId      Int? // This should also be Int to match the primary ID
+  // Use the LinkPrecedence enum for this field.
+  linkPrecedence LinkPrecedence
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  // Add the deletedAt field back, as the logic depends on it.
+  deletedAt     DateTime?
+
+  // Add indexes for efficient lookups on email and phoneNumber, but not unique constraints.
+  @@index([email])
+  @@index([phoneNumber])
 }

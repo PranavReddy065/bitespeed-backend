@@ -1,26 +1,29 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import pool from './db';
-import contactRoutes from './routes/contact';  
+// Removed 'import pool from './db';' as Prisma handles database connections.
+import contactRoutes from './routes/contact'; // Correct import for your 'contact.ts' router file
 
 dotenv.config();
 
-pool.connect()
-  .then(() => console.log('Connected to PostgreSQL'))
-  .catch((err) => console.error('Failed to connect to PostgreSQL:', err));
+// Removed pool.connect() as Prisma handles database connections
+// and this can conflict or be redundant.
 
 const app = express();
 
 app.use(express.json());
 
-app.use('/api', contactRoutes);
+// Changed the mount point from '/api' to '/'
+// This means that if 'contactRoutes' defines a route like '/identify',
+// the final accessible endpoint will be '/identify'.
+app.use('/', contactRoutes);
 
+// A basic GET route for checking if the server is running.
 app.get('/', (_req, res) => {
-  res.send('Bitespeed Backend is running!');
+    res.send('Bitespeed Backend is running!');
 });
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
+    console.log(`Server listening on port ${PORT}`);
 });
