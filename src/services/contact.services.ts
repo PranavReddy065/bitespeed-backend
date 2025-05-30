@@ -1,7 +1,7 @@
-    import { Contact, LinkPrecedence } from '../generated/prisma';
-    import { PrismaClient } from '@prisma/client';
+import { Contact, LinkPrecedence } from '../generated/prisma'; // KEEP THIS LINE
+import { PrismaClient} from '@prisma/client'; // Keep this one too
 
-    const prisma = new PrismaClient();
+const prisma = new PrismaClient();
 
     interface ConsolidatedContact {
         primaryContatctId: number;
