@@ -8,4 +8,3 @@ const router = express.Router();
 router.post('/identify', identifyContactController);
 
 export default router;
-P
