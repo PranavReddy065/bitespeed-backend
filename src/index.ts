@@ -1,5 +1,11 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import pool from './db';
+
+pool.connect()
+  .then(() => console.log('Connected to PostgreSQL'))
+  .catch((err) => console.error('Failed to connect to PostgreSQL:', err));
+
 
 dotenv.config();
 
